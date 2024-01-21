@@ -35720,6 +35720,8 @@ with pkgs;
 
   thonny = callPackage ../applications/editors/thonny { };
 
+  thorium = callPackage ../applications/networking/browsers/thorium { };
+
   betterbird-unwrapped = callPackage ../applications/networking/mailreaders/betterbird { };
   betterbird = wrapThunderbird betterbird-unwrapped {
     desktopName = "Betterbird";
