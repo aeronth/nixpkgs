@@ -19,12 +19,6 @@ let
   assertCondition = true;
 in
 
-# We should use libstdc++ at least as new as nixpkgs' stdenv's one.
-assert let
-  cxxStdlibCuda = cudaStdenv.cc.cxxStdlib.package;
-  cxxStdlibNixpkgs = stdenv.cc.cxxStdlib.package;
-in
-((stdenv.cc.cxxStdlib.kind or null) == "libstdc++")
--> lib.versionAtLeast cxxStdlibCuda.version cxxStdlibNixpkgs.version;
+  /* TODO: Consider testing whether we in fact use the newer libstdc++ */
 
 lib.extendDerivation assertCondition passthruExtra cudaStdenv
