@@ -15,14 +15,14 @@
 
 buildPythonPackage rec {
   pname = "python-gitlab";
-  version = "4.2.0";
+  version = "4.4.0";
   pyproject = true;
 
   disabled = pythonOlder "3.7";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-+HDXb5jJXQXEM5nXOx6qtZxnGzJ5ODDNL53fMsyTVB4=";
+    hash = "sha256-HRF797QzroJV5ddOcsZgl49Q7oXrYiSMn7Uu9Dw+OBQ=";
   };
 
   nativeBuildInputs = [
@@ -52,6 +52,7 @@ buildPythonPackage rec {
 
   meta = with lib; {
     description = "Interact with GitLab API";
+    mainProgram = "gitlab";
     homepage = "https://github.com/python-gitlab/python-gitlab";
     changelog = "https://github.com/python-gitlab/python-gitlab/blob/v${version}/CHANGELOG.md";
     license = licenses.lgpl3Only;

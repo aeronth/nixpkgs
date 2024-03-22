@@ -8,7 +8,7 @@
 , nix-update-script
 }:
 
-let version = "1.6.0";
+let version = "1.6.2";
 in
 rustPlatform.buildRustPackage {
   pname = "meilisearch";
@@ -18,7 +18,7 @@ rustPlatform.buildRustPackage {
     owner = "meilisearch";
     repo = "MeiliSearch";
     rev = "refs/tags/v${version}";
-    hash = "sha256-B1psJeGWG0E5oPu+OVAxkdJNblqaBzB/CurpLxdESB8=";
+    hash = "sha256-D8KAleYaeMv3rCwhGE0IteuDUVk4RiOxsTBe7LhLAKg=";
   };
 
   cargoBuildFlags = [
@@ -56,6 +56,7 @@ rustPlatform.buildRustPackage {
 
   meta = with lib; {
     description = "Powerful, fast, and an easy to use search engine";
+    mainProgram = "meilisearch";
     homepage = "https://docs.meilisearch.com/";
     changelog = "https://github.com/meilisearch/meilisearch/releases/tag/v${version}";
     license = licenses.mit;

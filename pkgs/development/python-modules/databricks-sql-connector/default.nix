@@ -18,7 +18,7 @@
 
 buildPythonPackage rec {
   pname = "databricks-sql-connector";
-  version = "3.0.1";
+  version = "3.1.0";
   format = "pyproject";
 
   disabled = pythonOlder "3.7";
@@ -27,7 +27,7 @@ buildPythonPackage rec {
     owner = "databricks";
     repo = "databricks-sql-python";
     rev = "refs/tags/v${version}";
-    hash = "sha256-ymR/PL+LC7Bt+thtCJs5kfbJgKDgioUo+T79E7ZUQWY=";
+    hash = "sha256-LiA+zZuhPPXgBb8B1vZ/PuAYMrBXzxgd1CXwugf0mk8=";
   };
 
   pythonRelaxDeps = [

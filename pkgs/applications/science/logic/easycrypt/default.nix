@@ -22,11 +22,12 @@ stdenv.mkDerivation rec {
     batteries
     dune-build-info
     inifiles
+    why3
     yojson
     zarith
   ];
 
-  propagatedBuildInputs = [ why3 ];
+  propagatedBuildInputs = [ why3.out ];
 
   strictDeps = true;
 
@@ -50,5 +51,6 @@ stdenv.mkDerivation rec {
     platforms = lib.platforms.all;
     homepage = "https://easycrypt.info/";
     description = "Computer-Aided Cryptographic Proofs";
+    mainProgram = "easycrypt";
   };
 }

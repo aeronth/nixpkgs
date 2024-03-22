@@ -1,7 +1,7 @@
 {
   # General callPackage-supplied arguments
-  autoAddOpenGLRunpathHook,
-  autoAddCudaCompatRunpathHook,
+  autoAddDriverRunpath,
+  autoAddCudaCompatRunpath,
   autoPatchelfHook,
   backendStdenv,
   fetchurl,
@@ -47,6 +47,8 @@ let
   # The redistArch is the name of the architecture for which the redistributable is built.
   # It is `"unsupported"` if the redistributable is not supported on the target platform.
   redistArch = flags.getRedistArch hostPlatform.system;
+
+  sourceMatchesHost = flags.getNixSystem redistArch == stdenv.hostPlatform.system;
 in
 backendStdenv.mkDerivation (
   finalAttrs: {
@@ -136,7 +138,9 @@ backendStdenv.mkDerivation (
     # badPlatformsConditions :: AttrSet Bool
     # Sets `meta.badPlatforms = meta.platforms` if any of the conditions are true.
     # Example: Broken on a specific architecture when some condition is met (like targeting Jetson).
-    badPlatformsConditions = { };
+    badPlatformsConditions = {
+      "No source" = !sourceMatchesHost;
+    };
 
     # src :: Optional Derivation
     src = trivial.pipe redistArch [
@@ -189,16 +193,16 @@ backendStdenv.mkDerivation (
       # in typically /lib/opengl-driver by adding that
       # directory to the rpath of all ELF binaries.
       # Check e.g. with `patchelf --print-rpath path/to/my/binary
-      autoAddOpenGLRunpathHook
+      autoAddDriverRunpath
       markForCudatoolkitRootHook
     ]
-    # autoAddCudaCompatRunpathHook depends on cuda_compat and would cause
+    # autoAddCudaCompatRunpath depends on cuda_compat and would cause
     # infinite recursion if applied to `cuda_compat` itself (beside the fact
     # that it doesn't make sense in the first place)
     ++ lib.optionals (pname != "cuda_compat" && flags.isJetsonBuild) [
-      # autoAddCudaCompatRunpathHook must appear AFTER autoAddOpenGLRunpathHook.
+      # autoAddCudaCompatRunpath must appear AFTER autoAddDriverRunpath.
       # See its documentation in ./setup-hooks/extension.nix.
-      autoAddCudaCompatRunpathHook
+      autoAddCudaCompatRunpath
     ];
 
     buildInputs =

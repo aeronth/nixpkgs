@@ -26,16 +26,16 @@
 
 rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
   pname = "neovide";
-  version = "0.12.1";
+  version = "0.12.2";
 
   src = fetchFromGitHub {
     owner = "neovide";
     repo = "neovide";
     rev = version;
-    sha256 = "sha256-lmhTTBlhyEepUNHrm2hq42G1kA7siAsJUcYjBfajaHA=";
+    sha256 = "sha256-M19LKNjUmC0WkVGm4t7vjxgMMe0FdMTmB1mLcG33OUg=";
   };
 
-  cargoSha256 = "sha256-1R1JrNhcgC16anr5Gl1b9rHgfRLPJElef5D65joHxj0=";
+  cargoHash = "sha256-2fPprZVT7V+Ot8aCpWj6WTdyFylmzlujFdTJCrtE0rk=";
 
   SKIA_SOURCE_DIR =
     let
@@ -78,11 +78,6 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
     darwin.apple_sdk.frameworks.AppKit
   ];
 
-  env = lib.optionalAttrs stdenv.isDarwin {
-    # Work around https://github.com/NixOS/nixpkgs/issues/166205
-    NIX_LDFLAGS = "-l${stdenv.cc.libcxx.cxxabi.libName}";
-  };
-
   postFixup = let
     libPath = lib.makeLibraryPath ([
       libglvnd
@@ -114,6 +109,7 @@ rustPlatform.buildRustPackage.override { stdenv = clangStdenv; } rec {
 
   meta = with lib; {
     description = "This is a simple graphical user interface for Neovim.";
+    mainProgram = "neovide";
     homepage = "https://github.com/neovide/neovide";
     changelog = "https://github.com/neovide/neovide/releases/tag/${version}";
     license = with licenses; [ mit ];

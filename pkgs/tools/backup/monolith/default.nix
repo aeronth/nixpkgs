@@ -10,16 +10,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "monolith";
-  version = "2.8.0";
+  version = "2.8.1";
 
   src = fetchFromGitHub {
     owner = "Y2Z";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-TYLQkVVjIFr6BrPaKJSHDnLAK0HQuI3Pmi2IkWVoIn4=";
+    sha256 = "sha256-qMB4Tok0tYAqj8r9LEkjhBV5ko+hwagFS7MsL8AYJnc=";
   };
 
-  cargoHash = "sha256-NIKueum/BQEW21e8/DGadtwylXeT3Vl2TOVbbxxWkLY=";
+  cargoHash = "sha256-FeD0+s79orFDUVsb205W0pdXgDI+p1UrH3GIfKwUqDQ=";
 
   nativeBuildInputs = lib.optionals stdenv.isLinux [ pkg-config ];
   buildInputs = lib.optionals stdenv.isLinux [ openssl ]
@@ -29,6 +29,7 @@ rustPlatform.buildRustPackage rec {
 
   meta = with lib; {
     description = "Bundle any web page into a single HTML file";
+    mainProgram = "monolith";
     homepage = "https://github.com/Y2Z/monolith";
     license = licenses.unlicense;
     maintainers = with maintainers; [ Br1ght0ne ];

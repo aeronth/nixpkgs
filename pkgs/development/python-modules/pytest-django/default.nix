@@ -7,16 +7,15 @@
 , django-configurations
 , pytest
 , pytestCheckHook
-, pytest-xdist
 }:
 buildPythonPackage rec {
   pname = "pytest-django";
-  version = "4.7.0";
+  version = "4.8.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-ktb9RrHXm1T7awYLuzlCgHM5bOxxfV8uEiqZDUtqpeg=";
+    hash = "sha256-XQVP4BHFbzsQ+Xj0Go77Llrfx+aA7zb7VxraHyR3nZA=";
   };
 
   nativeBuildInputs = [
@@ -35,7 +34,6 @@ buildPythonPackage rec {
   nativeCheckInputs = [
     django-configurations
     pytestCheckHook
-    pytest-xdist
   ];
 
   preCheck = ''
@@ -50,6 +48,8 @@ buildPythonPackage rec {
     # AttributeError: type object 'TestLiveServer' has no attribute '_test_settings_before_run'
     "test_settings_restored"
   ];
+
+  __darwinAllowLocalNetworking = true;
 
   meta = with lib; {
     description = "py.test plugin for testing of Django applications";

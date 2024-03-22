@@ -18,7 +18,7 @@
 
 buildPythonPackage rec {
   pname = "pyenphase";
-  version = "1.17.0";
+  version = "1.20.0";
   pyproject = true;
 
   disabled = pythonOlder "3.11";
@@ -27,19 +27,19 @@ buildPythonPackage rec {
     owner = "pyenphase";
     repo = "pyenphase";
     rev = "refs/tags/v${version}";
-    hash = "sha256-GNyhUk2/CSSdigrAJ0T2F1+49PkyPxMaec3nO9/cmNo=";
+    hash = "sha256-/TyQ6oSA361at1VSr6dLefOOmbZP4otBgb/JDA2sNWo=";
   };
 
   postPatch = ''
     substituteInPlace pyproject.toml \
-      --replace " --cov=pyenphase --cov-report=term-missing:skip-covered" ""
+      --replace-fail " --cov=pyenphase --cov-report=term-missing:skip-covered" ""
   '';
 
-  nativeBuildInputs = [
+  build-system = [
     poetry-core
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     awesomeversion
     envoy-utils
     httpx

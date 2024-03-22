@@ -6,16 +6,16 @@
 }:
 buildGoModule rec {
   pname = "osv-scanner";
-  version = "1.6.1";
+  version = "1.6.2";
 
   src = fetchFromGitHub {
     owner = "google";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-ddzdOk2sHNzjCM4cLJY+H9h13MjamlC1RYcnOcDGV4M=";
+    hash = "sha256-/V0zn4Aic6tBJw23YJWkyeCZXf/ehIZlKWd9TZXe40Y=";
   };
 
-  vendorHash = "sha256-9cE4UcQipJYwQDZA4jlcV68BBTgft7oRVlngg/PAmWI=";
+  vendorHash = "sha256-wIXc0YYTdcnUBNbypVwZJ/RNTmaeMteEujmgs5WJ1g0=";
 
   subPackages = [
     "cmd/osv-scanner"
@@ -38,6 +38,7 @@ buildGoModule rec {
 
   meta = with lib; {
     description = "Vulnerability scanner written in Go which uses the data provided by https://osv.dev";
+    mainProgram = "osv-scanner";
     homepage = "https://github.com/google/osv-scanner";
     changelog = "https://github.com/google/osv-scanner/releases/tag/v${version}";
     license = licenses.asl20;

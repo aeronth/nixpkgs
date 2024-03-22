@@ -13,12 +13,12 @@
 
 buildPythonPackage rec {
   pname = "pyfaidx";
-  version = "0.7.2.2";
+  version = "0.8.1.1";
   format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-O3aTwFLIJpEAD+SpJHXbgv/DtachoSsQ37yHEZxLTTA=";
+    hash = "sha256-bwSCNSYZ8sxWADyiIyG9sNB2S2VnlbweQGKx+psIaGs=";
   };
 
   nativeBuildInputs = [
@@ -50,6 +50,7 @@ buildPythonPackage rec {
   meta = with lib; {
     homepage = "https://github.com/mdshw5/pyfaidx";
     description = "Python classes for indexing, retrieval, and in-place modification of FASTA files using a samtools compatible index";
+    mainProgram = "faidx";
     license = licenses.bsd3;
     maintainers = with maintainers; [ jbedo ];
   };

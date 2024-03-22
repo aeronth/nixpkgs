@@ -21,13 +21,13 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "variety";
-  version = "0.8.11";
+  version = "0.8.12";
 
   src = fetchFromGitHub {
     owner = "varietywalls";
     repo = "variety";
     rev = "refs/tags/${version}";
-    hash = "sha256-JdfFzlfj1J5gx11MfOqIdzvBiheWBaGLxg5jCvvsrp8=";
+    hash = "sha256-FjnhV7vzRPVDCgUNK8CHo3arKXuwe+3xH/5AxCVgeIY=";
   };
 
   nativeBuildInputs = [
@@ -82,6 +82,7 @@ python3.pkgs.buildPythonApplication rec {
   meta = with lib; {
     homepage = "https://github.com/varietywalls/variety";
     description = "A wallpaper manager for Linux systems";
+    mainProgram = "variety";
     longDescription = ''
       Variety is a wallpaper manager for Linux systems. It supports numerous
       desktops and wallpaper sources, including local files and online services:

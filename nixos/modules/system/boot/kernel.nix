@@ -81,6 +81,13 @@ in
             extraStructuredConfig.FOO = lib.kernel.yes;
             features.foo = true;
           }
+          {
+            name = "foo-ml-mbox";
+            patch = (fetchurl {
+              url = "https://lore.kernel.org/lkml/19700205182810.58382-1-email@domain/t.mbox.gz";
+              hash = "sha256-...";
+            });
+          }
         ]
       '';
       description = lib.mdDoc ''
@@ -226,7 +233,9 @@ in
         symlinks because modprobe only supports one directory.
       '';
       # Convert the list of path to only one path.
-      apply = pkgs.aggregateModules;
+      apply = let
+        kernel-name = config.boot.kernelPackages.kernel.name or "kernel";
+      in modules: (pkgs.aggregateModules modules).override { name = kernel-name + "-modules"; };
     };
 
     system.requiredKernelConfig = mkOption {

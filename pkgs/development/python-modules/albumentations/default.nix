@@ -1,27 +1,31 @@
 { lib
 , buildPythonPackage
 , fetchPypi
+, setuptools
 , numpy
 , opencv4
 , pyyaml
 , qudida
 , scikit-image
 , scipy
+, deepdiff
 , pytestCheckHook
 , pythonOlder
 , pythonRelaxDepsHook
+, torch
+, torchvision
 }:
 
 buildPythonPackage rec {
   pname = "albumentations";
-  version = "1.3.1";
-  format = "setuptools";
+  version = "1.4.1";
+  pyproject = true;
 
-  disabled = pythonOlder "3.7";
+  disabled = pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-pqODiP5UbFaAcejIL0FEmOhsntA8CLWOeoizHPeiRMY=";
+    hash = "sha256-VWxTqVi9Js5IT1RQWNdVr1XbE6gLiu9pRrh63LOKVUU=";
   };
 
   nativeBuildInputs = [
@@ -32,7 +36,11 @@ buildPythonPackage rec {
     "opencv-python"
   ];
 
-  propagatedBuildInputs = [
+  build-system = [
+    setuptools
+  ];
+
+  dependencies = [
     numpy
     opencv4
     pyyaml
@@ -42,7 +50,10 @@ buildPythonPackage rec {
   ];
 
   nativeCheckInputs = [
+    deepdiff
     pytestCheckHook
+    torch
+    torchvision
   ];
 
   disabledTests = [

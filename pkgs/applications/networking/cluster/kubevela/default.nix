@@ -10,16 +10,16 @@
 
 buildGoModule rec {
   pname = "kubevela";
-  version = "1.9.8";
+  version = "1.9.10";
 
   src = fetchFromGitHub {
     owner = "kubevela";
     repo = "kubevela";
     rev = "v${version}";
-    hash = "sha256-Bf9OS8IlsahE40JsYTALC3oW6HliyqycA2CTJFRRTag=";
+    hash = "sha256-DWmkPzMg6AbyOKoO2vev48f/cKO9XQpyR85Jg0T20aI=";
   };
 
-  vendorHash = "sha256-obvlie4P3mhp2VMyUYHNZIlgfICM4PDhu4YKeDsVMxw=";
+  vendorHash = "sha256-vRSlSEnqD/a6KBvCWnNTzIBKE9BYzMtFWUhAF+m3R54=";
 
   ldflags = [
     "-s" "-w"
